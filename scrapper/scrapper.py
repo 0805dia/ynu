@@ -1,21 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
 
-def search_incruit(keyword,page):
+def search_incruit(keyword,page=1):
     jobs = []
     for i in range(page):
         page = i * 30
-        response= requests.get(
+        response= requests.get(    #requsts 추출해올때 사용
             f"https://search.incruit.com/list/search.asp?col=job&kw={keyword}&startno={page}")
 
         soup = BeautifulSoup(response.text, "html.parser")
 
-        lis = soup.find_all("li", class_="c_col")
+        lis = soup.find_all("li", class_="c_col")   #find_all 관련된 것 모두 가져옴
 
 
         for li in lis:
-            company = li.find("a",class_="cpname").text
-            
+            company = li.find("a",class_="cpname").text #find는 하나만 가져옴           
             title = li.find("div", class_="cell_mid").find("a").text
             location = li.find("div" ,class_="cell_mid").find_all("span")[3].text
             link = li.find("div", class_="cell_mid").find("a").get("href")
@@ -35,7 +34,7 @@ def search_incruit(keyword,page):
 
 
 
-def search_jobkorea(keyword,page):
+def search_jobkorea(keyword,page=1):
     jobs =[]
     for i in range(page):
         page = i+1
@@ -74,9 +73,9 @@ def search_jobkorea(keyword,page):
 
 
 
-result= search_jobkorea("회계",10)
-print(result)
-print(len(result))
+# result= search_jobkorea("회계",10)
+# print(result)
+# print(len(result))
 
 
 

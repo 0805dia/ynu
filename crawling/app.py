@@ -37,7 +37,7 @@ for item in lis:
     }
     articles.append(article)
 
-    with open(img_name, "wb") as img_file:
+    with open(img_name, "wb") as img_file:                  # "wb"는 이미지, 동영상 파일
         img_file.write(img_data)
 
 print(f"{downloaded-1}개의 이미지를 다운로드 했습니다")
